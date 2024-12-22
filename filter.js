@@ -3,216 +3,259 @@ const filterEvenNumbers = function (numbers) {
   return numbers.filter(function (number) { return number % 2 === 0; });
 };
 
-console.log(filterEvenNumbers([1, 2, 3, 4, 5]));
-
 // words with more than 5 letters ["apple", "banana", "kiwi", "grape"] => ["banana"]
 const filterLongWords = function (words) {
   return words.filter(function (word) { return word.length > 5; });
 };
-
-console.log(filterLongWords(['apple', 'banana', 'kiwi', 'grape']));
 
 // people older than 30 [{name: "Alice", age: 25}, {name: "Bob", age: 35}] => [{name: "Bob", age: 35}]
 const filterAdults = function (people) {
   return people.filter(function (person) { return person.age > 30; });
 };
 
-console.log(filterAdults([{ name: "Alice", age: 25 }, { name: "Bob", age: 35 }]));
-
 // active users [{username: "alice", active: true}, {username: "bob", active: false}] => [{username: "alice", active: true}]
 const filterActiveUsers = function (users) {
   return users.filter(function (user) { return user.active; });
 };
-
-console.log(filterActiveUsers([{ username: "alice", active: true }, { username: "bob", active: false }]));
 
 // numbers greater than 10 [5, 12, 7, 18, 3] => [12, 18]
 const filterNumbersGreaterThanTen = function (numbers) {
   return numbers.filter(function (number) { return number > 10; });
 };
 
-console.log(filterNumbersGreaterThanTen([5, 12, 7, 18, 3]));
-
 // books with more than 200 pages [{title: "Book 1", pages: 150}, {title: "Book 2", pages: 250}] => [{title: "Book 2", pages: 250}]
 const filterLongBooks = function (books) {
   return books.filter(function (book) { return book.pages > 200; });
 };
-
-console.log(filterLongBooks([{ title: "Book 1", pages: 150 }, { title: "Book 2", pages: 250 }]));
 
 // users with incomplete profiles [{username: "alice", profileComplete: true}, {username: "bob", profileComplete: false}] => [{username: "bob", profileComplete: false}]
 const filterIncompleteProfiles = function (users) {
   return users.filter(function (user) { return !user.profileComplete; });
 };
 
-console.log(filterIncompleteProfiles([{ username: "alice", profileComplete: true }, { username: "bob", profileComplete: false }]));
-
 // students with grades above 80 [{name: "John", grade: 75}, {name: "Jane", grade: 85}] => [{name: "Jane", grade: 85}]
 const filterHighGrades = function (students) {
   return students.filter(function (student) { return student.grade > 80; });
 };
-
-console.log(filterHighGrades([{ name: "John", grade: 75 }, { name: "Jane", grade: 85 }]));
 
 // products that are in stock [{product: "apple", inStock: true}, {product: "banana", inStock: false}] => [{product: "apple", inStock: true}]
 const filterInStockProducts = function (products) {
   return products.filter(function (product) { return product.inStock; });
 };
 
-console.log(filterInStockProducts([{ product: "apple", inStock: true }, { product: "banana", inStock: false }]));
-
 // orders placed in the last 30 days [{orderDate: "2024-11-01"}, {orderDate: "2024-12-01"}] => [{orderDate: "2024-12-01"}]
-const filterRecentOrders = function (orders) {
-  return orders.filter(function (order) { return order.orderDate.includes('2024') && order['orderDate'].slice(5, 7) === '12'; });
-};
-
-console.log(filterRecentOrders([{ orderDate: "2024-11-01" }, { orderDate: "2024-12-01" }]));
+const filterRecentOrders = function (orders) { };
 
 // products with a price lower than the average [{name: "item1", price: 10}, {name: "item2", price: 20}, {name: "item3", price: 5}] => [{name: "item1", price: 10}, {name: "item3", price: 5}]
-const filterBelowAveragePrice = function (products) {
-  return products.filter(function (product) { return product.price < 12; });
+const getAttribute = function (attribute) {
+  return function (object) {
+    return object[attribute];
+  };
 };
 
-console.log(filterBelowAveragePrice([{ name: "item1", price: 10 }, { name: "item2", price: 20 }, { name: "item3", price: 5 }]));
+const sum = function (result, number) {
+  return result + number;
+};
+const average = function (numbers) {
+  return numbers.reduce(sum, 0) / numbers.length;
+};
+
+const filterBelowAveragePrice = function (products) {
+  const avg = average(products.map(getAttribute('price')));
+
+  return products.filter(function (product) { return product.price < avg; });
+};
 
 // active users who posted in the last 7 days [{username: "alice", lastPostDate: "2024-12-01", active: true}, {username: "bob", lastPostDate: "2024-11-20", active: true}] => [{username: "alice", lastPostDate: "2024-12-01", active: true}]
-const filterRecentActiveUsers = function (users) {
-  return users.filter(function (user) { return user.lastPostDate.slice(8, 10) > 15; });
-};
-
-console.log(filterRecentActiveUsers([{ username: "alice", lastPostDate: "2024-12-01", active: true }, { username: "bob", lastPostDate: "2024-11-20", active: true }]));
+const filterRecentActiveUsers = function (users) { };
 
 // students who passed all subjects [{name: "John", subjects: [{name: "Math", passed: true}, {name: "Science", passed: true}]}, {name: "Jane", subjects: [{name: "Math", passed: false}, {name: "Science", passed: true}]}] => [{name: "John", subjects: [{name: "Math", passed: true}, {name: "Science", passed: true}]}]
-const filterStudentsWithAllSubjectsPassed = function (students) {
-  return students.filter(function (student) { return !student.passed; });
+const areAllSubjectsPassed = function (subjects) {
+  return !subjects.map(getAttribute('passed')).includes(false);
 };
 
-console.log(filterStudentsWithAllSubjectsPassed([{ name: "John", subjects: [{ name: "Math", passed: true }, { name: "Science", passed: true }] }, { name: "Jane", subjects: [{ name: "Math", passed: false }, { name: "Science", passed: true }] }]));
+const filterStudentsWithAllSubjectsPassed = function (students) {
+  return students.filter(function (student) { return areAllSubjectsPassed(student.subjects); });
+};
 
 // people whose birthday is this month [{name: "Alice", birthDate: "2024-12-01"}, {name: "Bob", birthDate: "2024-11-01"}] => [{name: "Alice", birthDate: "2024-12-01"}]
-const filterBirthdaysThisMonth = function (people) {
-  return people.filter(function (person) { return person.birthDate.slice(5, 7) === '12'; });
+const isDateInThisMonth = function (person) {
+  return person.birthDate.slice(5, 7) === '12';
 };
 
-console.log(filterBirthdaysThisMonth([{ name: "Alice", birthDate: "2024-12-01" }, { name: "Bob", birthDate: "2024-11-01" }]));
+const filterBirthdaysThisMonth = function (people) {
+  return people.filter(isDateInThisMonth);
+};
 
 // orders that exceed the average order value [{orderId: 1, amount: 20}, {orderId: 2, amount: 50}, {orderId: 3, amount: 10}] => [{orderId: 2, amount: 50}]
 const filterHighValueOrders = function (orders) {
-  return orders.filter(function (order) { return order.amount > 25; });
+  const avg = average(orders.map(getAttribute('amount')));
+  return orders.filter(function (order) { return order.amount > avg; });
 };
-
-console.log(filterHighValueOrders([{ orderId: 1, amount: 20 }, { orderId: 2, amount: 50 }, { orderId: 3, amount: 10 }]));
 
 // books with reviews higher than the average rating [{title: "Book 1", rating: 4}, {title: "Book 2", rating: 5}, {title: "Book 3", rating: 3}] => [{title: "Book 2", rating: 5}]
 const filterTopRatedBooks = function (books) {
-  return books.filter(function (book) { return book.rating === 5; });
+  const avg = average(books.map(getAttribute('rating')));
+  return books.filter(function (book) { return book.rating > avg; });
 };
-
-console.log(filterTopRatedBooks([{ title: "Book 1", rating: 4 }, { title: "Book 2", rating: 5 }, { title: "Book 3", rating: 3 }]));
 
 // employees whose salary is higher than the department average [{name: "Alice", salary: 5000, department: "HR"}, {name: "Bob", salary: 7000, department: "HR"}, {name: "Charlie", salary: 4000, department: "IT"}] => [{name: "Bob", salary: 7000, department: "HR"}]
 const filterHighSalaryEmployees = function (employees) {
-  return employees.filter(function (employee) { return employee.salary > 6000; });
+  const avg = average(employees.map(getAttribute('salary')));
+  return employees.filter(function (employee) { return employee.salary > avg; });
 };
-
-console.log(filterHighSalaryEmployees([{ name: "Alice", salary: 5000, department: "HR" }, { name: "Bob", salary: 7000, department: "HR" }, { name: "Charlie", salary: 4000, department: "IT" }]));
 
 // cities with a population higher than the median [{name: "City A", population: 2000}, {name: "City B", population: 5000}, {name: "City C", population: 3000}] => [{name: "City B", population: 5000}]
 const filterCitiesAboveMedianPopulation = function (cities) {
-  return cities.filter(function (city) { return city.population > 3000; });
+  const avg = average(cities.map(getAttribute('population')));
+  return cities.filter(function (city) { return city.population > avg; });
 };
-
-console.log(filterCitiesAboveMedianPopulation([{ name: "City A", population: 2000 }, { name: "City B", population: 5000 }, { name: "City C", population: 3000 }]));
 
 // posts with more than the average number of likes [{postId: 1, likes: 100}, {postId: 2, likes: 200}, {postId: 3, likes: 150}] => [{postId: 2, likes: 200}]
 const filterPopularPosts = function (posts) {
-  return posts.filter(function (post) { return post.likes > 150; });
+  const avg = average(posts.map(getAttribute('likes')));
+  return posts.filter(function (post) { return post.likes > avg; });
 };
-
-console.log(filterPopularPosts([{ postId: 1, likes: 100 }, { postId: 2, likes: 200 }, { postId: 3, likes: 150 }]));
 
 // users who have posted more than the average number of posts [{username: "Alice", postCount: 5}, {username: "Bob", postCount: 8}, {username: "Charlie", postCount: 3}] => [{username: "Bob", postCount: 8}]
 const filterActiveUsersByPostCount = function (users) {
-  return users.filter(function (user) { return user.postCount > 5; });
+  const avg = average(users.map(getAttribute('postCount')));
+  return users.filter(function (user) { return user.postCount > avg; });
 };
-
-console.log(filterActiveUsersByPostCount([{ username: "Alice", postCount: 5 }, { username: "Bob", postCount: 8 }, { username: "Charlie", postCount: 3 }]));
 
 // filter people older than a certain age [{name: "Alice", age: 25}, {name: "Bob", age: 30}, {name: "Charlie", age: 22}] => [{name: "Bob", age: 30}]
-const filterByAge = function (people, age) {
-  return people.filter(function (age) { return function (person) { return person.age > age; }; }(age));
+const isOlderThan = function (age) {
+  return function (person) {
+    return person.age > age;
+  };
 };
 
-console.log(filterByAge([{ name: "Alice", age: 25 }, { name: "Bob", age: 30 }, { name: "Charlie", age: 22 }], 25));
+const filterByAge = function (people, age) {
+  return people.filter(isOlderThan(age));
+};
 
 // filter products that are cheaper than a given price [{name: "item1", price: 20}, {name: "item2", price: 50}, {name: "item3", price: 10}] => [{name: "item1", price: 20}, {name: "item3", price: 10}]
-const filterByPrice = function (products, price) {
-  return products.filter(function (price) { return function (product) { return product.price > price; }; }(price));
+const isCheaperThan = function (cost) {
+  return function (product) {
+    return product.price < cost;
+  };
 };
 
-console.log(filterByPrice([{ name: "item1", price: 20 }, { name: "item2", price: 50 }, { name: "item3", price: 10 }], 25));
+const filterByPrice = function (products, price) {
+  return products.filter(isCheaperThan(price));
+};
+
 
 // filter students who scored above a certain grade in Math [{name: "John", grades: {math: 80, science: 90}}, {name: "Jane", grades: {math: 70, science: 85}}] => [{name: "John", grades: {math: 80, science: 90}}]
-const filterByMathGrade = function (students, grade) {
-  return students.filter(function (grade) { return function (student) { return student.grades.math > grade; }; }(grade));
+const isGradeAbove = function (grade) {
+  return function (student) {
+    return student.grades.math > grade;
+  };
 };
 
-console.log(filterByMathGrade([{ name: "John", grades: { math: 80, science: 90 } }, { name: "Jane", grades: { math: 70, science: 85 } }], 75));
+const filterByMathGrade = function (students, grade) {
+  return students.filter(isGradeAbove(grade));
+};
+
 
 // filter events that occur before a certain date [{name: "Event1", date: "2024-12-01"}, {name: "Event2", date: "2024-11-15"}] => [{name: "Event2", date: "2024-11-15"}]
-const filterByDate = function (events, date) {
-  return events.filter(function (date) { return function (event) { return event.date < date; }; }(date));
+const isBefore = function (date) {
+  return function (event) {
+    return event.date < date;
+  };
 };
 
-console.log(filterByDate([{ name: "Event1", date: "2024-12-01" }, { name: "Event2", date: "2024-11-15" }], '2024-11-30'));
+const filterByDate = function (events, date) {
+  return events.filter(isBefore(date));
+};
+
 
 // filter employees who earn more than a certain salary [{name: "Alice", salary: 5000}, {name: "Bob", salary: 7000}] => [{name: "Bob", salary: 7000}]
-const filterBySalary = function (employees, salary) {
-  return employees.filter(function (salary) { return function (employee) { return employee.salary > salary; }; }(salary));
+const isSalaryAbove = function (salary) {
+  return function (employee) {
+    return employee.salary > salary;
+  };
 };
 
-console.log(filterBySalary([{ name: "Alice", salary: 5000 }, { name: "Bob", salary: 7000 }], 5000));
+const filterBySalary = function (employees, salary) {
+  return employees.filter(isSalaryAbove(salary));
+};
 
 // filter orders with a quantity greater than a given number [{orderId: 1, quantity: 10}, {orderId: 2, quantity: 5}] => [{orderId: 1, quantity: 10}]
-const filterByQuantity = function (orders, quantity) {
-  return orders.filter(function (quantity) { return function (order) { return order.quantity > quantity; }; }(quantity));
+const isQuantityAbove = function (quantity) {
+  return function (order) {
+    return order.quantity > quantity;
+  };
 };
 
-console.log(filterByQuantity([{ orderId: 1, quantity: 10 }, { orderId: 2, quantity: 5 }], 7));
+const filterByQuantity = function (orders, quantity) {
+  return orders.filter(isQuantityAbove(quantity));
+};
 
 // filter books published after a certain year [{title: "Book1", year: 2020}, {title: "Book2", year: 2022}] => [{title: "Book2", year: 2022}]
-const filterByYear = function (books, year) {
-  return books.filter(function (year) { return function (book) { return book.year > year; }; }(year));
+const isPublishedAfter = function (year) {
+  return function (book) {
+    return book.year > year;
+  };
 };
 
-console.log(filterByYear([{ title: "Book1", year: 2020 }, { title: "Book2", year: 2022 }], 2020));
+const filterByYear = function (books, year) {
+  return books.filter(isPublishedAfter(year));
+};
 
 // filter students with a grade higher than a given threshold in a specific subject [{name: "Alice", grades: {math: 90, science: 80}}, {name: "Bob", grades: {math: 70, science: 85}}] => [{name: "Alice", grades: {math: 90, science: 80}}]
-const filterBySubjectGrade = function (students, subject, threshold) {
-  return students.filter(function (subject, threshold) { return function (student) { return student.grades[subject] > threshold; }; }(subject, threshold));
+const isGradeAboveIn = function (subject, threshold) {
+  return function (student) { return student.grades[subject] > threshold; };
 };
 
-console.log(filterBySubjectGrade([{ name: "Alice", grades: { math: 90, science: 80 } }, { name: "Bob", grades: { math: 70, science: 85 } }], 'math', 75));
+const filterBySubjectGrade = function (students, subject, threshold) {
+  return students.filter(isGradeAboveIn(subject, threshold));
+};
 
 // filter photos with a minimum number of likes [{id: 1, likes: 100}, {id: 2, likes: 50}] => [{id: 1, likes: 100}]
-const filterByLikes = function (photos, likes) {
-  return photos.filter(function (likes) { return function (photo) { return photo.likes > likes; }; }(likes));
+const areLikesLess = function (likes) {
+  return function (photo) {
+    return photo.likes > likes;
+  };
 };
 
-console.log(filterByLikes([{ id: 1, likes: 100 }, { id: 2, likes: 50 }], 50));
+const filterByLikes = function (photos, likes) {
+  return photos.filter(areLikesLess(likes));
+};
 
 // filter users who have made a certain number of posts [{username: "Alice", posts: 10}, {username: "Bob", posts: 5}] => [{username: "Alice", posts: 10}]
-const filterByPostCount = function (users, postCount) {
-  return users.filter(function (postCount) { return function (user) { return user.posts > postCount; }; }(postCount));
+const isPostCountEqual = function (postCount) {
+  return function (user) {
+    return user.posts > postCount;
+  };
 };
 
-console.log(filterByPostCount([{ username: "Alice", posts: 10 }, { username: "Bob", posts: 5 }], 5));
+const filterByPostCount = function (users, postCount) {
+  return users.filter(isPostCountEqual(postCount));
+};
 
 // Apply a discount to each item's price, then filter for items under a certain price [{name: "item1", price: 100}, {name: "item2", price: 50}] => [{name: "item2", price: 45}]
-const filterDiscountedItems = function (items, discount, maxPrice) { };
+const applyDiscount = function (discount) {
+  return function (item) {
+    item.price = item.price - discount;
+    return item;
+  };
+};
+
+const filterDiscountedItems = function (items, discount, maxPrice) {
+  const productsWithDiscount = items.map(applyDiscount(discount));
+  return productsWithDiscount.filter(isCheaperThan(maxPrice));
+};
 
 // Convert product names to uppercase, then filter for products with names longer than a certain number [{name: "apple"}, {name: "banana"}] => [{name: "APPLE"}]
-const filterLongProductNames = function (products, minLength) { };
+const toUpperCase = function (product) {
+  return { name: product.name.toUpperCase() };
+};
+
+const filterLongProductNames = function (products, minLength) {
+  const updated = products.map(toUpperCase);
+  return updated.filter(function (product) { return product.name.length > minLength; });
+};
 
 // Group users by their age, then filter for specific age groups [{name: "Alice", age: 25}, {name: "Bob", age: 35}] => [{name: "Bob", age: 35}]
 const filterAgeGroups = function (users, ageGroup) { };
@@ -457,3 +500,39 @@ const findInStockItems = function (items, lookup) { };
 // Input: ["Lion", "Elephant", "Shark"], { "Lion": { habitat: "Jungle" }, "Elephant": { habitat: "Jungle" }, "Shark": { habitat: "Ocean" } } , "Jungle"
 // Output: ["Lion", "Elephant"]
 const findAnimalsByHabitat = function (animals, lookup) { };
+
+
+const test = function () {
+  console.log(filterEvenNumbers([1, 2, 3, 4, 5]));
+  console.log(filterLongWords(['apple', 'banana', 'kiwi', 'grape']));
+  console.log(filterAdults([{ name: "Alice", age: 25 }, { name: "Bob", age: 35 }]));
+  console.log(filterActiveUsers([{ username: "alice", active: true }, { username: "bob", active: false }]));
+  console.log(filterNumbersGreaterThanTen([5, 12, 7, 18, 3]));
+  console.log(filterLongBooks([{ title: "Book 1", pages: 150 }, { title: "Book 2", pages: 250 }]));
+  console.log(filterIncompleteProfiles([{ username: "alice", profileComplete: true }, { username: "bob", profileComplete: false }]));
+  console.log(filterHighGrades([{ name: "John", grade: 75 }, { name: "Jane", grade: 85 }]));
+  console.log(filterInStockProducts([{ product: "apple", inStock: true }, { product: "banana", inStock: false }]));
+  console.log(filterBelowAveragePrice([{ name: "item1", price: 10 }, { name: "item2", price: 20 }, { name: "item3", price: 5 }]));
+  console.log(filterStudentsWithAllSubjectsPassed([{ name: "John", subjects: [{ name: "Math", passed: true }, { name: "Science", passed: true }] }, { name: "Jane", subjects: [{ name: "Math", passed: false }, { name: "Science", passed: true }] }]));
+  console.log(filterBirthdaysThisMonth([{ name: "Alice", birthDate: "2024-12-01" }, { name: "Bob", birthDate: "2024-11-01" }]));
+  console.log(filterHighValueOrders([{ orderId: 1, amount: 20 }, { orderId: 2, amount: 50 }, { orderId: 3, amount: 10 }]));
+  console.log(filterTopRatedBooks([{ title: "Book 1", rating: 4 }, { title: "Book 2", rating: 5 }, { title: "Book 3", rating: 3 }]));
+  console.log(filterHighSalaryEmployees([{ name: "Alice", salary: 5000, department: "HR" }, { name: "Bob", salary: 7000, department: "HR" }, { name: "Charlie", salary: 4000, department: "IT" }]));
+  console.log(filterCitiesAboveMedianPopulation([{ name: "City A", population: 2000 }, { name: "City B", population: 5000 }, { name: "City C", population: 3000 }]));
+  console.log(filterPopularPosts([{ postId: 1, likes: 100 }, { postId: 2, likes: 200 }, { postId: 3, likes: 150 }]));
+  console.log(filterActiveUsersByPostCount([{ username: "Alice", postCount: 5 }, { username: "Bob", postCount: 8 }, { username: "Charlie", postCount: 3 }]));
+  console.log(filterByAge([{ name: "Alice", age: 25 }, { name: "Bob", age: 30 }, { name: "Charlie", age: 22 }], 25));
+  console.log(filterByPrice([{ name: "item1", price: 20 }, { name: "item2", price: 50 }, { name: "item3", price: 10 }], 25));
+  console.log(filterByMathGrade([{ name: "John", grades: { math: 80, science: 90 } }, { name: "Jane", grades: { math: 70, science: 85 } }], 75));
+  console.log(filterByDate([{ name: "Event1", date: "2024-12-01" }, { name: "Event2", date: "2024-11-15" }], '2024-11-30'));
+  console.log(filterBySalary([{ name: "Alice", salary: 5000 }, { name: "Bob", salary: 7000 }], 5000));
+  console.log(filterByQuantity([{ orderId: 1, quantity: 10 }, { orderId: 2, quantity: 5 }], 7));
+  console.log(filterByYear([{ title: "Book1", year: 2020 }, { title: "Book2", year: 2022 }], 2020));
+  console.log(filterBySubjectGrade([{ name: "Alice", grades: { math: 90, science: 80 } }, { name: "Bob", grades: { math: 70, science: 85 } }], 'math', 75));
+  console.log(filterByLikes([{ id: 1, likes: 100 }, { id: 2, likes: 50 }], 50));
+  console.log(filterByPostCount([{ username: "Alice", posts: 10 }, { username: "Bob", posts: 5 }], 5));
+  console.log(filterDiscountedItems([{name: "item1", price: 100}, {name: "item2", price: 50}], 5, 50))
+  console.log(filterLongProductNames([{ name: "apple" }, { name: "banana" }], 5));
+};
+
+test();
