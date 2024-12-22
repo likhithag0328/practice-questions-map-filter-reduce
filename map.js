@@ -1,59 +1,43 @@
 // squares of [1, 2, 3] => [1, 4, 9]
-const square = function (number) {
-  return number * number;
-};
-
 const squaresOf = function (numbers) {
-  return numbers.map(square);
+  return numbers.map(function (number) { return number * number; });
 };
 
 // lengths of ["apple", "banana", "kiwi"] => [5, 6, 4]
-const length = function (string) {
-  return string.length;
-};
-
 const lengthsOf = function (strings) {
-  return strings.map(length);
+  return strings.map(function (string) { return string.length; });
 };
 
 // uppercase of ["hello", "world"] => ["HELLO", "WORLD"]
-const toUpperCase = function (string) {
-  return string.toUpperCase();
-};
-
 const uppercaseOf = function (strings) {
-  return strings.map(toUpperCase);
+  return strings.map(function (string) { return string.toUpperCase(); });
 };
 
 // first characters of ["apple", "banana", "kiwi"] => ["a", "b", "k"]
-const getFirstChar = function (string) {
-  return string[0];
-};
-
 const firstCharactersOf = function (strings) {
-  return strings.map(getFirstChar);
+  return strings.map(function (string) { return string[0]; });
 };
 
 // truth values of [0, 1, 2, 3] => [false, true, true, true]
 // Assume non-zero numbers are true, and zero is false
-const getTruthValue = function (number) {
-  return number !== 0;
-};
-
 const truthValuesOf = function (numbers) {
-  return numbers.map(getTruthValue);
+  return numbers.map(function (number) { return number !== 0; });
 };
 
 // reverse strings of ["hello", "world"] => ["olleh", "dlrow"]
-const reverse = function ([...string]) {
+const reverseString = function ([...string]) {
   return string.reverse().join('');
 };
 
 const reversedStringsOf = function (strings) {
-  return strings.map(reverse);
+  return strings.map(reverseString);
 };
 
 // double letters of ["cat", "dog", "bat"] => ["ccaat", "ddoog", "bbaatt"]
+const double = function (string) {
+  return string.repeat(2);
+};
+
 const getDoubleLetteredString = function (string) {
   return [...string].map(double).join('');
 };
@@ -63,22 +47,14 @@ const doubleLettersOf = function (strings) {
 };
 
 // boolean negation of [true, false, true] => [false, true, false]
-const negateBoolean = function (boolean) {
-  return !boolean;
-};
-
 const negatedBooleansOf = function (booleans) {
-  return booleans.map(negateBoolean);
+  return booleans.map(function (boolean) { return !boolean; });
 };
 
 // character codes of ["a", "b", "c"] => [97, 98, 99]
 // Use the `charCodeAt` method on each string
-const getCharCode = function (string) {
-  return string.charCodeAt();
-};
-
 const charCodesOf = function (strings) {
-  return strings.map(getCharCode);
+  return strings.map(function (string) { return string.charCodeAt(); });
 };
 
 // extract domain names from ["user1@gmail.com", "admin@yahoo.com"] => ["gmail.com", "yahoo.com"]
@@ -91,28 +67,16 @@ const domainNamesOf = function (emails) {
 };
 
 // split words in ["hello world", "goodbye moon"] => [["hello", "world"], ["goodbye", "moon"]]
-const splitWords = function (string) {
-  return string.split(' ');
-};
-
 const splitWordsOf = function (strings) {
-  return strings.map(splitWords);
+  return strings.map(function (string) { return [string.split(' ')]; });
 };
 
 // join arrays of [["a", "b"], ["c", "d"]] => ["ab", "cd"]
-const joinArray = function (array) {
-  return array.join('');
-};
-
 const joinedArraysOf = function (arrayOfArrays) {
-  return arrayOfArrays.map(joinArray);
+  return arrayOfArrays.map(function (array) { return array.join(''); });
 };
 
 // repeat strings in ["hi", "bye"] => ["hihi", "byebye"]
-const double = function (string) {
-  return string.repeat(2);
-};
-
 const repeatedStringsOf = function (strings) {
   return strings.map(double);
 };
@@ -258,10 +222,8 @@ const sortedLettersOf = function (strings) {
 };
 
 // wrap strings in brackets ["apple", "banana"] => ["[apple]", "[banana]"]
-const addBraces = function ([...string]) {
-  string.push(']');
-  string.unshift('[');
-  return string.join('');
+const addBraces = function (string) {
+  return '[' + string + ']';
 };
 
 const wrappedStringsOf = function (strings) {
