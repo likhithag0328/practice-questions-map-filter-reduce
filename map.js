@@ -1,70 +1,85 @@
 // squares of [1, 2, 3] => [1, 4, 9]
-const squaresOf = function (numbers) {
-  return numbers.map(function (number) { return number * number; });
+const square = function (number) {
+  return number * number;
 };
 
-console.log(squaresOf([1, 2, 3]));
+const squaresOf = function (numbers) {
+  return numbers.map(square);
+};
 
 // lengths of ["apple", "banana", "kiwi"] => [5, 6, 4]
-const lengthsOf = function (strings) {
-  return strings.map(function (string) { return string.length; });
+const length = function (string) {
+  return string.length;
 };
 
-console.log(lengthsOf(["apple", "banana", "kiwi"]));
+const lengthsOf = function (strings) {
+  return strings.map(length);
+};
 
 // uppercase of ["hello", "world"] => ["HELLO", "WORLD"]
-const uppercaseOf = function (strings) {
-  return strings.map(function (string) { return string.toUpperCase(); });
+const toUpperCase = function (string) {
+  return string.toUpperCase();
 };
 
-console.log(uppercaseOf(["hello", "world"]));
+const uppercaseOf = function (strings) {
+  return strings.map(toUpperCase);
+};
 
 // first characters of ["apple", "banana", "kiwi"] => ["a", "b", "k"]
-const firstCharactersOf = function (strings) {
-  return strings.map(function (string) { return string[0]; });
+const getFirstChar = function (string) {
+  return string[0];
 };
 
-console.log(firstCharactersOf(["apple", "banana", "kiwi"]));
+const firstCharactersOf = function (strings) {
+  return strings.map(getFirstChar);
+};
 
 // truth values of [0, 1, 2, 3] => [false, true, true, true]
 // Assume non-zero numbers are true, and zero is false
-const truthValuesOf = function (numbers) {
-  return numbers.map(function (number) { return number !== 0; });
+const getTruthValue = function (number) {
+  return number !== 0;
 };
 
-console.log(truthValuesOf([0, 1, 2, 3]));
+const truthValuesOf = function (numbers) {
+  return numbers.map(getTruthValue);
+};
 
 // reverse strings of ["hello", "world"] => ["olleh", "dlrow"]
-const reversedStringsOf = function (strings) {
-  return strings.map(function (string) { return [...string].reverse().join(''); });
+const reverse = function ([...string]) {
+  return string.reverse().join('');
 };
 
-console.log(reversedStringsOf(["hello", "world"]));
+const reversedStringsOf = function (strings) {
+  return strings.map(reverse);
+};
 
 // double letters of ["cat", "dog", "bat"] => ["ccaat", "ddoog", "bbaatt"]
 const getDoubleLetteredString = function (string) {
-  return [...string].map(function (char) { return char.repeat(2); }).join('');
+  return [...string].map(double).join('');
 };
+
 const doubleLettersOf = function (strings) {
   return strings.map(getDoubleLetteredString);
 };
 
-console.log(doubleLettersOf(["cat", "dog", "bat"]));
-
 // boolean negation of [true, false, true] => [false, true, false]
-const negatedBooleansOf = function (booleans) {
-  return booleans.map(function (boolean) { return !boolean; });
+const negateBoolean = function (boolean) {
+  return !boolean;
 };
 
-console.log(negatedBooleansOf([true, false, true]));
+const negatedBooleansOf = function (booleans) {
+  return booleans.map(negateBoolean);
+};
 
 // character codes of ["a", "b", "c"] => [97, 98, 99]
 // Use the `charCodeAt` method on each string
-const charCodesOf = function (strings) {
-  return strings.map(function (string) { return string.charCodeAt(); });
+const getCharCode = function (string) {
+  return string.charCodeAt();
 };
 
-console.log(charCodesOf(["a", "b", "c"]));
+const charCodesOf = function (strings) {
+  return strings.map(getCharCode);
+};
 
 // extract domain names from ["user1@gmail.com", "admin@yahoo.com"] => ["gmail.com", "yahoo.com"]
 const getDomain = function (email) {
@@ -75,28 +90,32 @@ const domainNamesOf = function (emails) {
   return emails.map(getDomain);
 };
 
-console.log(domainNamesOf(["user1@gmail.com", "admin@yahoo.com"]));
-
 // split words in ["hello world", "goodbye moon"] => [["hello", "world"], ["goodbye", "moon"]]
-const splitWordsOf = function (strings) {
-  return strings.map(function (string) { return [string.split(' ')]; });
+const splitWords = function (string) {
+  return string.split(' ');
 };
 
-console.log(splitWordsOf(["hello world", "goodbye moon"]));
+const splitWordsOf = function (strings) {
+  return strings.map(splitWords);
+};
 
 // join arrays of [["a", "b"], ["c", "d"]] => ["ab", "cd"]
-const joinedArraysOf = function (arrayOfArrays) {
-  return arrayOfArrays.map(function (array) { return array.join(''); });
+const joinArray = function (array) {
+  return array.join('');
 };
 
-console.log(joinedArraysOf([["a", "b"], ["c", "d"]]));
+const joinedArraysOf = function (arrayOfArrays) {
+  return arrayOfArrays.map(joinArray);
+};
 
 // repeat strings in ["hi", "bye"] => ["hihi", "byebye"]
-const repeatedStringsOf = function (strings) {
-  return strings.map(function (string) { return string.repeat(2); });
+const double = function (string) {
+  return string.repeat(2);
 };
 
-console.log(repeatedStringsOf(["hi", "bye"]));
+const repeatedStringsOf = function (strings) {
+  return strings.map(double);
+};
 
 // count vowels in ["apple", "banana", "grape"] => [2, 3, 2]
 const isVowel = function (char) {
@@ -112,14 +131,14 @@ const countVowelsOf = function (strings) {
   return strings.map(getVowelCount);
 };
 
-console.log(countVowelsOf(["apple", "banana", "grape"]));
-
 // reverse arrays of [[1, 2, 3], [4, 5, 6]] => [[3, 2, 1], [6, 5, 4]]
-const reversedArraysOf = function (arrays) {
-  return arrays.map(function (array) { return array.reverse(); });
+const reverseArray = function (array) {
+  return array.reverse();
 };
 
-console.log(reversedArraysOf([[1, 2, 3], [4, 5, 6]]));
+const reversedArraysOf = function (arrays) {
+  return arrays.map(reverseArray);
+};
 
 // remove vowels from ["apple", "banana", "grape"] => ["ppl", "bnn", "grp"]
 const invert = function (f) {
@@ -136,8 +155,6 @@ const withoutVowelsOf = function (strings) {
   return strings.map(removeVowels);
 };
 
-console.log(withoutVowelsOf(["apple", "banana", "grape"]));
-
 // cumulative sums of [[1, 2, 3], [4, 5, 6]] => [[1, 3, 6], [4, 9, 15]]
 // Example: cumulative sum of [1, 2, 3] is [1, 1+2, 1+2+3]
 const runningTotal = function (result, number) {
@@ -153,8 +170,6 @@ const cumulativeSumsOf = function (arrays) {
   return arrays.map(cummulativeSumOf);
 };
 
-console.log(cumulativeSumsOf([[1, 2, 3], [4, 5, 6]]));
-
 // reverse words in ["hello world", "goodbye moon"] => ["olleh dlrow", "eybdoog noom"]
 const reverseWords = function (string) {
   return reversedStringsOf(string.split(' ')).join(' ');
@@ -163,8 +178,6 @@ const reverseWords = function (string) {
 const reversedWordsOf = function (strings) {
   return strings.map(reverseWords);
 };
-
-console.log(reversedWordsOf(["hello world", "goodbye moon"]));
 
 // extract unique characters from ["apple", "banana", "grape"] => ["aple", "ban", "grape"]
 // Maintain the order of their first appearance in each string
@@ -184,10 +197,8 @@ const uniqueCharactersOf = function (strings) {
   return strings.map(getUniqueChars);
 };
 
-console.log(uniqueCharactersOf(["apple", "banana", "grape"]));
-
 // generate ranges from [3, 5, 2] => [[0, 1, 2], [0, 1, 2, 3, 4], [0, 1]]
-function range(from, to, step) {
+const range = function (from, to, step) {
   const array = [];
 
   for (let number = from; number < to; number = number + step) {
@@ -195,13 +206,15 @@ function range(from, to, step) {
   }
 
   return array;
-}
-
-const rangesOf = function (numbers) {
-  return numbers.map(function (to) { return range(0, to, 1); });
 };
 
-console.log(rangesOf([3, 5, 2]));
+const getNumbersUpto = function (to) {
+  return range(0, to, 1);
+};
+
+const rangesOf = function (numbers) {
+  return numbers.map(getNumbersUpto);
+};
 
 // capitalize first letters of ["hello world", "goodbye moon"] => ["Hello World", "Goodbye Moon"]
 const capitalizeFirstLetter = function (string) {
@@ -217,8 +230,6 @@ const capitalizedFirstLettersOf = function (strings) {
   return strings.map(capitalize);
 };
 
-console.log(capitalizedFirstLettersOf(["hello world", "goodbye moon"]));
-
 // find word lengths in ["apple pie", "banana split"] => [[5, 3], [6, 5]]
 const getLengthOfEachWord = function (string) {
   return lengthsOf(string.split(' '));
@@ -228,14 +239,14 @@ const wordLengthsOf = function (strings) {
   return strings.map(getLengthOfEachWord);
 };
 
-console.log(wordLengthsOf(["apple pie", "banana split"]));
-
 // flatten nested arrays of [[1, [2, 3]], [4, [5, 6]]] => [[1, 2, 3], [4, 5, 6]]
-const flattenedArraysOf = function (arrays) {
-  return arrays.map(function (array) { return array.flat(); });
+const flattenArray = function (array) {
+  return array.flat();
 };
 
-console.log(flattenedArraysOf([[1, [2, 3]], [4, [5, 6]]]));
+const flattenedArraysOf = function (arrays) {
+  return arrays.map(flattenArray);
+};
 
 // sort letters in ["cat", "bat", "rat"] alphabetically => ["act", "abt", "art"]
 const sortLetters = function ([...string]) {
@@ -245,8 +256,6 @@ const sortLetters = function ([...string]) {
 const sortedLettersOf = function (strings) {
   return strings.map(sortLetters);
 };
-
-console.log(sortedLettersOf(["cat", "bat", "rat"]));
 
 // wrap strings in brackets ["apple", "banana"] => ["[apple]", "[banana]"]
 const addBraces = function ([...string]) {
@@ -259,106 +268,264 @@ const wrappedStringsOf = function (strings) {
   return strings.map(addBraces);
 };
 
-console.log(wrappedStringsOf(["apple", "banana"]));
-
 // extract names from [{ name: "Alice" }, { name: "Bob" }] => ["Alice", "Bob"]
-const extractNames = function (objects) {
-  return objects.map(function (object) { return object.name; });
+const getAttribute = function (attribute) {
+  return function (object) {
+    return object[attribute];
+  };
 };
 
-console.log(extractNames([{ name: "Alice" }, { name: "Bob" }]));
+const extractNames = function (objects) {
+  return objects.map(getAttribute('name'));
+};
 
 // extract ages from [{ age: 25 }, { age: 30 }] => [25, 30]
 const extractAges = function (objects) {
-  return objects.map(function (object) { return object.age; });
+  return objects.map(getAttribute('age'));
 };
-
-console.log(extractAges([{ age: 25 }, { age: 30 }]));
 
 // extract the first letters of names from [{ name: "Alice" }, { name: "Bob" }] => ["A", "B"]
 const firstLettersOfNames = function (objects) {
-  return objects.map(function (object) { return object.name[0]; });
+  const names = extractNames(objects);
+  return firstCharactersOf(names);
 };
-
-console.log(firstLettersOfNames([{ name: "Alice" }, { name: "Bob" }]));
 
 // calculate areas from [{ width: 2, height: 3 }, { width: 4, height: 5 }] => [6, 20]
-const calculateAreas = function (rectangles) {
-  return rectangles.map(function (rectangle) { return rectangle.width * rectangle.height; });
+const product = function (attribute1, attribute2) {
+  return function (object) {
+    return object[attribute1] * object[attribute2];
+  };
 };
 
-console.log(calculateAreas([{ width: 2, height: 3 }, { width: 4, height: 5 }]));
+const calculateAreas = function (rectangles) {
+  return rectangles.map(product('width', 'height'));
+};
 
 // extract boolean flags from [{ active: true }, { active: false }] => [true, false]
 const extractFlags = function (objects) {
-  return objects.map(function (object) { return object.active; });
+  return objects.map(getAttribute('active'));
 };
 
-console.log(extractFlags([{ active: true }, { active: false }]));
-
 // concatenate first and last names from [{ firstName: "Alice", lastName: "Smith" }, { firstName: "Bob", lastName: "Brown" }] => ["Alice Smith", "Bob Brown"]
-const fullNames = function (objects) { };
+const getFullName = function (object) {
+  return [object.firstName, object.lastName].join(' ');
+};
+
+const fullNames = function (objects) {
+  return objects.map(getFullName);
+};
 
 // calculate total prices from [{ price: 10, quantity: 2 }, { price: 5, quantity: 4 }] => [20, 20]
 // (price * quantity)
-const totalPrices = function (objects) { };
+const totalPrices = function (objects) {
+  return objects.map(product('price', 'quantity'));
+};
 
 // determine if a person is an adult from [{ name: "Alice", age: 17 }, { name: "Bob", age: 22 }] => [false, true]
 // (age >= 18)
-const isAdult = function (objects) { };
+const isGreaterThan = function (attribute, threshold) {
+  return function (object) {
+    return object[attribute] > threshold;
+  };
+};
+const isAdult = function (objects) {
+  return objects.map(isGreaterThan('age', 17));
+};
 
 // create abbreviations from [{ city: "New York", country: "USA" }, { city: "Los Angeles", country: "USA" }] => ["NY, USA", "LA, USA"]
-const abbreviations = function (objects) { };
+const isUpperCase = function (char) {
+  return char === char.toUpperCase() && char !== ' ';
+};
+
+const getAbbrevation = function (object) {
+  const city = [...object['city']];
+  return [city.filter(isUpperCase).join(''), object.country].join(', ');
+};
+
+const abbreviations = function (objects) {
+  return objects.map(getAbbrevation).flat();
+};
 
 // extract scores for math tests from [{ name: "Alice", scores: { math: 90, english: 85 } }, { name: "Bob", scores: { math: 80, english: 75 } }] => [90, 80]
-const mathScores = function (objects) { };
+const mathScores = function (objects) {
+  const scores = objects.map(getAttribute('scores'));
+  return scores.map(getAttribute('math'));
+};
 
 // extract coordinates from [{ x: 1, y: 2 }, { x: 3, y: 4 }] => [[1, 2], [3, 4]]
-const extractCoordinates = function (objects) { };
+const getAnAttribute = function (object) {
+  return function (attribute) {
+    return object[attribute];
+  };
+};
+
+const getMultipleAttributes = function (...attributes) {
+  return function (object) {
+    return attributes.map(getAnAttribute(object));
+  };
+};
+
+const extractCoordinates = function (objects) {
+  return objects.map(getMultipleAttributes('x', 'y'));
+};
 
 // extract full name and age from [{ firstName: "Alice", lastName: "Smith", age: 25 }, { firstName: "Bob", lastName: "Brown", age: 30 }] => [["Alice Smith", 25], ["Bob Brown", 30]]
-const fullNameAndAge = function (objects) { };
+const fullNameAndAge = function (objects) {
+  return objects.map(function (object) { return [getFullName(object), object.age]; });
+};
 
 // extract scores from [{ name: "Alice", scores: { math: 90, english: 85 } }, { name: "Bob", scores: { math: 80, english: 75 } }] => [[90, 85], [80, 75]]
-const extractScores = function (objects) { };
+const extractScores = function (objects) {
+  const scores = objects.map(getAttribute('scores'));
+  return scores.map(getMultipleAttributes('math', 'english'));
+};
 
 // extract key-value pairs from [{ key: "a", value: 1 }, { key: "b", value: 2 }] => [["a", 1], ["b", 2]]
-const keyValuePairs = function (objects) { };
+const keyValuePairs = function (objects) {
+  return objects.map(getMultipleAttributes('key', 'value'));
+};
 
 // split full names into first and last names from [{ name: "Alice Smith" }, { name: "Bob Brown" }] => [["Alice", "Smith"], ["Bob", "Brown"]]
-const splitFullNames = function (objects) { };
+const splitName = function (object) {
+  return object.name.split(' ');
+};
+
+const splitFullNames = function (objects) {
+  return objects.map(splitName);
+};
 
 // normalize scores so they fall between 0 and 1 based on the max score from [{ name: "Alice", score: 80 }, { name: "Bob", score: 100 }] => [0.8, 1]
-const normalizeScores = function (objects) { };
+const normalizeScore = function (object) {
+  return object.score / 100;
+};
+
+const normalizeScores = function (objects) {
+  return objects.map(normalizeScore);
+};
 
 // calculate percentage contribution of each number in [10, 20, 30] (relative to the total sum) => [16.67, 33.33, 50]
-const percentageContributions = function (numbers) { };
+const findSum = function (sum, number) {
+  return sum + number;
+};
+
+const findPercentage = function (total) {
+  return function (number) {
+    return (number / total) * 100;
+  };
+};
+
+const percentageContributions = function (numbers) {
+  const sum = numbers.reduce(findSum, 0);
+  return numbers.map(findPercentage(sum));
+};
 
 // subtract the smallest number from each number in [3, 8, 1] => [2, 7, 0]
-const subtractMin = function (numbers) { };
+const subtractMinimum = function (minimum) {
+  return function (number) {
+    return number - minimum;
+  };
+};
+
+const subtractMin = function (numbers) {
+  const minimum = Math.min(...numbers);
+  return numbers.map(subtractMinimum(minimum));
+};
 
 // calculate ranks (1-based, descending) for scores in [{ name: "Alice", score: 80 }, { name: "Bob", score: 100 }, { name: "Charlie", score: 90 }] => [2, 1, 3]
-const calculateRanks = function (objects) { };
+const comparator = function (a, b) {
+  return b - a;
+};
+
+const mapRanks = function (sortedScores) {
+  return function (score) {
+    return sortedScores.indexOf(score) + 1;
+  };
+};
+
+const calculateRanks = function (objects) {
+  const scores = objects.map(getAttribute('score'));
+  const sortedScores = [...scores];
+  return scores.map(mapRanks(sortedScores.sort(comparator)));
+};
 
 // normalize strings by the longest string length in ["cat", "elephant", "dog"] => ["cat    ", "elephant", "dog    "]
 // (pad with spaces to match the longest length)
-const normalizeStringLengths = function (strings) { };
+const padSpaces = function (length) {
+  return function (string) {
+    return string.padEnd(length, ' ');
+  };
+};
+
+const normalizeStringLengths = function (strings) {
+  const maximumLength = Math.max(...lengthsOf(strings));
+  return strings.map(padSpaces(maximumLength));
+};
 
 // normalize strings by centering them based on the longest string length in ["cat", "elephant", "dog"] => ["  cat   ", "elephant", "  dog   "]
 // (pad with spaces to justify to the center)
-const centerJustifyStrings = function (strings) { };
+const centerJustify = function (length) {
+  return function (string) {
+    let result = string.padStart(string.length + (length - string.length) / 2);
+    result = result.padEnd(length);
+    return result;
+  };
+};
+
+const centerJustifyStrings = function (strings) {
+  const maximumLength = Math.max(...lengthsOf(strings));
+  return strings.map(centerJustify(maximumLength));
+};
 
 // scale all numbers proportionally so the largest number becomes 100 in [20, 50, 80] => [25, 62.5, 100]
-const scaleToMax100 = function (numbers) { };
+const scaleTo100 = function (multiplyingFactor) {
+  return function (number) {
+    return number * multiplyingFactor;
+  };
+};
+
+const scaleToMax100 = function (numbers) {
+  const maximum = Math.max(...numbers);
+  return numbers.map(scaleTo100(100 / maximum));
+};
 
 // map each number to the difference between it and the average of the array in [10, 20, 30] => [-10, 0, 10]
-const differencesFromMean = function (numbers) { };
+const sum = function (result, number) {
+  return result + number;
+};
+
+const subtract = function (subtrahend) {
+  return function (number) {
+    return number - subtrahend;
+  };
+};
+
+const differencesFromMean = function (numbers) {
+  const average = numbers.reduce(sum, 0) / numbers.length;
+  return numbers.map(subtract(average));
+};
 
 // map each string to its frequency in ["apple", "banana", "apple", "apple", "banana"] => [3, 2, 3, 3, 2]
-const stringFrequencies = function (strings) { };
+const frequencies = function (strings) {
+  return function (string) {
+    return strings.filter(function (element) { return element === string; }).length;
+  };
+};
+
+const stringFrequencies = function (strings) {
+  return strings.map(frequencies(strings));
+};
 
 // mark the largest number in an array as true, others as false in [1, 3, 2] => [false, true, false]
-const markLargestNumber = function (numbers) { };
+const isMaximum = function (maximum) {
+  return function (number) {
+    return number === maximum;
+  };
+};
+
+const markLargestNumber = function (numbers) {
+  const maximum = Math.max(...numbers);
+  return numbers.map(isMaximum(maximum));
+};
 
 // normalize scores based on a curve: first find the max score, then subtract the mean, and scale the results to a range of 0-100 in [{ name: "Alice", score: 80 }, { name: "Bob", score: 100 }, { name: "Charlie", score: 90 }] => [60, 100, 80]
 // Steps: Find max score, calculate mean, normalize each score.
@@ -577,3 +744,58 @@ const summarizeBookChapters = function (books) { };
 // [{name: "Concert", attendees: [{firstName: "John", lastName: "Doe"}, {firstName: "Jane", lastName: "Smith"}]}, {name: "Conference", attendees: [{firstName: "Bob", lastName: "Brown"}]}]
 // => [{name: "Concert", attendees: ["John Doe", "Jane Smith"]}, {name: "Conference", attendees: ["Bob Brown"]}]
 const getEventAttendees = function (events) { };
+
+const test = function () {
+  console.log(squaresOf([1, 2, 3]));
+  console.log(lengthsOf(["apple", "banana", "kiwi"]));
+  console.log(uppercaseOf(["hello", "world"]));
+  console.log(firstCharactersOf(["apple", "banana", "kiwi"]));
+  console.log(truthValuesOf([0, 1, 2, 3]));
+  console.log(reversedStringsOf(["hello", "world"]));
+  console.log(doubleLettersOf(["cat", "dog", "bat"]));
+  console.log(negatedBooleansOf([true, false, true]));
+  console.log(charCodesOf(["a", "b", "c"]));
+  console.log(domainNamesOf(["user1@gmail.com", "admin@yahoo.com"]));
+  console.log(splitWordsOf(["hello world", "goodbye moon"]));
+  console.log(joinedArraysOf([["a", "b"], ["c", "d"]]));
+  console.log(repeatedStringsOf(["hi", "bye"]));
+  console.log(countVowelsOf(["apple", "banana", "grape"]));
+  console.log(reversedArraysOf([[1, 2, 3], [4, 5, 6]]));
+  console.log(withoutVowelsOf(["apple", "banana", "grape"]));
+  console.log(cumulativeSumsOf([[1, 2, 3], [4, 5, 6]]));
+  console.log(reversedWordsOf(["hello world", "goodbye moon"]));
+  console.log(uniqueCharactersOf(["apple", "banana", "grape"]));
+  console.log(rangesOf([3, 5, 2]));
+  console.log(capitalizedFirstLettersOf(["hello world", "goodbye moon"]));
+  console.log(wordLengthsOf(["apple pie", "banana split"]));
+  console.log(flattenedArraysOf([[1, [2, 3]], [4, [5, 6]]]));
+  console.log(sortedLettersOf(["cat", "bat", "rat"]));
+  console.log(wrappedStringsOf(["apple", "banana"]));
+  console.log(extractNames([{ name: "Alice" }, { name: "Bob" }]));
+  console.log(extractAges([{ age: 25 }, { age: 30 }]));
+  console.log(firstLettersOfNames([{ name: "Alice" }, { name: "Bob" }]));
+  console.log(calculateAreas([{ width: 2, height: 3 }, { width: 4, height: 5 }]));
+  console.log(extractFlags([{ active: true }, { active: false }]));
+  console.log(fullNames([{ firstName: "Alice", lastName: "Smith" }, { firstName: "Bob", lastName: "Brown" }]));
+  console.log(totalPrices([{ price: 10, quantity: 2 }, { price: 5, quantity: 4 }]));
+  console.log(isAdult([{ name: "Alice", age: 17 }, { name: "Bob", age: 22 }]));
+  console.log(abbreviations([{ city: "New York", country: "USA" }, { city: "Los Angeles", country: "USA" }]));
+  console.log(mathScores([{ name: "Alice", scores: { math: 90, english: 85 } }, { name: "Bob", scores: { math: 80, english: 75 } }]));
+  console.log(extractCoordinates([{ x: 1, y: 2 }, { x: 3, y: 4 }]));
+  console.log(fullNameAndAge([{ firstName: "Alice", lastName: "Smith", age: 25 }, { firstName: "Bob", lastName: "Brown", age: 30 }]));
+  console.log(extractScores([{ name: "Alice", scores: { math: 90, english: 85 } }, { name: "Bob", scores: { math: 80, english: 75 } }]));
+  console.log(keyValuePairs([{ key: "a", value: 1 }, { key: "b", value: 2 }]));
+  console.log(splitFullNames([{ name: "Alice Smith" }, { name: "Bob Brown" }]));
+  console.log(normalizeScores([{ name: "Alice", score: 80 }, { name: "Bob", score: 100 }]));
+  console.log(percentageContributions([10, 20, 30]));
+  console.log(subtractMin([3, 8, 1]));
+  console.log(calculateRanks([{ name: "Alice", score: 80 }, { name: "Bob", score: 100 }, { name: "Charlie", score: 90 }]));
+  console.log(normalizeStringLengths(["cat", "elephant", "dog"]));
+  console.log(centerJustifyStrings(["cat", "elephant", "dog"]));
+  console.log(scaleToMax100([20, 50, 80]));
+  console.log(differencesFromMean([10, 20, 30]));
+  console.log(stringFrequencies(["apple", "banana", "apple", "apple", "banana"]));
+  console.log(markLargestNumber([1, 3, 2]));
+};
+
+test();
