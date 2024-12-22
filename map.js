@@ -366,7 +366,7 @@ const normalizeScores = function (objects) {
 };
 
 // calculate percentage contribution of each number in [10, 20, 30] (relative to the total sum) => [16.67, 33.33, 50]
-const findSum = function (sum, number) {
+const sum = function (sum, number) {
   return sum + number;
 };
 
@@ -451,10 +451,6 @@ const scaleToMax100 = function (numbers) {
 };
 
 // map each number to the difference between it and the average of the array in [10, 20, 30] => [-10, 0, 10]
-const sum = function (result, number) {
-  return result + number;
-};
-
 const subtract = function (subtrahend) {
   return function (number) {
     return number - subtrahend;
@@ -462,7 +458,7 @@ const subtract = function (subtrahend) {
 };
 
 const differencesFromMean = function (numbers) {
-  const average = numbers.reduce(sum, 0) / numbers.length;
+  const average = numbers.reduce(findSum, 0) / numbers.length;
   return numbers.map(subtract(average));
 };
 
