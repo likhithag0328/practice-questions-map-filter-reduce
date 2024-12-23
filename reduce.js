@@ -124,28 +124,86 @@ const longestWord = function (words) {
 const shortestWord = function (words) { };
 
 // joinWithComma(["apple", "banana", "cherry"]) => "apple,banana,cherry"
-const joinWithComma = function (words) { };
+const joinWordsWith = function (char) {
+  return function (result, word) {
+    const separator = result === '' ? '' : char;
+    return [result, word].join(separator);
+  };
+};
+
+const joinWithComma = function (words) {
+  return words.reduce(joinWordsWith(','), '');
+};
 
 // reverseWords(["hello", "world"]) => "world hello"
-const reverseWords = function (words) { };
+const joinReversedWordsWithSpace = function (result, word) {
+  const separator = result === '' ? '' : ' ';
+  return [word, result].join(separator);
+};
+
+const reverseWords = function (words) {
+  return words.reduce(joinReversedWordsWithSpace, '');
+};
 
 // joinWordsWithSpace(["apple", "banana", "cherry"]) => "apple banana cherry"
-const joinWordsWithSpace = function (words) { };
+const joinWordsWithSpace = function (words) {
+  return words.reduce(joinWordsWith(' '), '');
+};
 
 // concatenateNames(["John", "Jane", "Doe"]) => "JohnJaneDoe"
-const concatenateNames = function (names) { };
+const concatenateNames = function (names) {
+  return names.reduce(joinWordsWith(''));
+};
 
 // countVowelsInWords(["hello", "world"]) => "eoo"
-const countVowelsInWords = function (words) { };
+const isVowel = function (char) {
+  const vowels = 'aeiou';
+  return vowels.includes(char);
+};
+
+const addIfVowel = function (result, [...string]) {
+  return result + string.filter(isVowel).join('');
+};
+
+const countVowelsInWords = function (words) {
+  return words.reduce(addIfVowel, '');
+};
 
 // makeCamelCase(["hello", "world", "how", "are", "you"]) => "helloWorldHowAreYou"
-const makeCamelCase = function (words) { };
+const capitalizeFirstLetter = function (string) {
+  return string[0].toUpperCase() + string.slice(1);
+};
+
+const createCamelCase = function (result, word) {
+  const string = result === '' ? word : capitalizeFirstLetter(word);
+  return [result, string].join('');
+};
+
+const makeCamelCase = function (words) {
+  return words.reduce(createCamelCase, '');
+};
 
 // reverseString(["apple", "banana", "cherry"]) => "elppaananabyrrehc"
-const reverseString = function (words) { };
+const reverseSingleString = function ([...string]) {
+  return string.reverse().join('');
+};
+
+const reverse = function (result, string) {
+  return [result, reverseSingleString(string)].join('');
+};
+
+const reverseString = function (words) {
+  return words.reduce(reverse, '');
+};
 
 // duplicateNumbers([1, 2, 3]) => [1, 1, 2, 2, 3, 3]
-const duplicateNumbers = function (numbers) { };
+const repeat = function (result, number) {
+  result.push(number, number);
+  return result;
+};
+const duplicateNumbers = function (numbers) {
+  return numbers.reduce(repeat, []);
+};
 
 // concatenateArrays([[1, 2], [3, 4], [5, 6]]) => [1, 2, 3, 4, 5, 6]
 const concatenateArrays = function (arrays) { };
@@ -265,6 +323,14 @@ const test = function () {
   console.log(findSumOfEvenSquares([1, 2, 3, 4]));
   console.log(concatenateWords(["hello", "world"]));
   console.log(longestWord(["apple", "banana", "cherry", "kiwi"]));
+  console.log(joinWithComma(["apple", "banana", "cherry"]));
+  console.log(reverseWords(["hello", "world"]));
+  console.log(joinWordsWithSpace(["apple", "banana", "cherry"]));
+  console.log(concatenateNames(["John", "Jane", "Doe"]));
+  console.log(countVowelsInWords(["hello", "world"]));
+  console.log(makeCamelCase(["hello", "world", "how", "are", "you"]));
+  console.log(reverseString(["apple", "banana", "cherry"]));
+  console.log(duplicateNumbers([1, 2, 3]));
 };
 
 test();
